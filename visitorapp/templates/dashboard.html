@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ user.firstName }}!</h2>
+
+    {% if user.role == "ADMIN" or user.role == "SECURITY" %}
+        <h3>Today's Visits</h3>
+    {% else %}
+        <div>
+            <h3>Your Visits</h3>
+            <a href="{% url 'request_visit' %}">Request visit</a>
+        </div>
+    {% endif %}
+
+    <ul>
+        {% for visit in visits %}
+        <li>{{ visit.purpose_of_visit }} on {{ visit.visit_date }} (Check out: {{ visit.check_out_date }}) and is/was {{visit.status}}</li>
+        {% endfor %}
+    </ul>
+
+    {% if user.role == "ADMIN" %}
+        <a href="{% url 'manage_visits' %}">Manage Pending Visits</a> <br /> <br />
+    {% endif %}
+
+    <a href="{% url 'logout' %}">Logout</a>
+</body>
+</html>

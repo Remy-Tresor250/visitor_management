@@ -1,0 +1,6 @@
+<h2>Visits for Today</h2>
+<ul>
+    {% for visit in visits %}
+    <li>{{ visit.user.firstName }} {{ visit.user.lastName }} is visiting for {{ visit.purpose_of_visit }} ({{ visit.visit_date }})</li>
+    {% endfor %}
+</ul>

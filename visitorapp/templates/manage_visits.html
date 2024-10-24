@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Visits</title>
+</head>
+<body>
+    <h2>Manage Pending Visits</h2>
+    <ul>
+        {% for visit in visits %}
+        <li>
+            {{ visit.user.firstName }} {{ visit.user.lastName }} - {{ visit.purpose_of_visit }} on {{ visit.visit_date|date:"Y-m-d H:i" }}
+            <form action="{% url 'manage_visits' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <input type="hidden" name="visit_id" value="{{ visit.visitId }}">
+                <button type="submit" name="action" value="accept">Accept</button>
+                <button type="submit" name="action" value="reject">Reject</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'dashboard' %}">Back to Dashboard</a>
+</body>
+</html>
