@@ -1,6 +1,6 @@
 from datetime import timezone
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 from django.contrib.auth.hashers import check_password
 from .models import User, Visits
 from .forms import UserRegistrationForm, LoginForm, VisitRequestForm
