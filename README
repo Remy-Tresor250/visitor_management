@@ -1,20 +1,18 @@
-# FastAPI User Authentication and Visit Request API
+# Django User Authentication and Visit Request API
 
-This project is a RESTful API built with **FastAPI**, enabling user authentication and management, as well as visit request handling. It includes features like user registration, login, and secure token-based authentication.
+This project is a RESTful API built with **Django** and **Django REST Framework (DRF)**, enabling user authentication, management, and visit request handling. It provides features such as secure token-based authentication and organization-specific visit request tracking.
 
 ## Features
 
-- **User Authentication**: Secure login with JWT tokens.
-- **User Management**: Create and retrieve user details.
-- **Visit Requests**: Handle visit requests with organization details and status tracking.
+- **User Authentication**: Implemented user auth during login.
+- **User Management**: User registration and role assignment.
+- **Visit Requests**: Create, update, and retrieve visit requests.
 
 ## Tech Stack
 
-- **FastAPI**: Python web framework for building APIs.
-- **SQLAlchemy**: ORM for database management.
-- **JWT (JSON Web Tokens)**: For secure user authentication.
-- **Pydantic**: Data validation and serialization.
-- **SQLite**: Default database for development.
+- **Django**: Web framework for backend development.
+- **Django REST Framework (DRF)**: Toolkit for building Web APIs.
+- **PSQL**: Default database for development.
 
 ## Setup Instructions
 
@@ -28,8 +26,8 @@ This project is a RESTful API built with **FastAPI**, enabling user authenticati
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Remy-Tresor250/fast_api_study.git
-   cd fast_api_study
+   git clone https://github.com/Remy-Tresor250/visitor_management.git
+   cd your-repo-name
    ```
 
 2. Create and activate a virtual environment:
@@ -45,18 +43,24 @@ This project is a RESTful API built with **FastAPI**, enabling user authenticati
    pip install -r requirements.txt
    ```
 
-4. Initialize the database:
+4. Apply migrations:
 
    ```bash
-   python -m app.main
+   python manage.py migrate
+   ```
+
+5. Create a superuser:
+
+   ```bash
+   python manage.py createsuperuser
    ```
 
 ### Running the Application
 
-Start the FastAPI server:
+Start the Django development server:
 
 ```bash
-uvicorn app.main:app --reload
+python manage.py runserver
 ```
 
 The API will be available at `http://127.0.0.1:8000`.
@@ -66,7 +70,7 @@ The API will be available at `http://127.0.0.1:8000`.
 #### User Endpoints
 
 - **Register a User**:
-  - **POST** `/users/`
+  - **POST** `/users/register/`
   - **Request Body**:
 
     ```json
@@ -79,22 +83,13 @@ The API will be available at `http://127.0.0.1:8000`.
     ```
 
 - **Login**:
-  - **POST** `/token`
-  - **Form Data**:
+  - **POST** `/token/`
+  - **Request Body**:
 
     ```json
     {
       "username": "trex",
       "password": "trex1234"
-    }
-    ```
-
-  - **Response**:
-
-    ```json
-    {
-      "access_token": "<JWT_TOKEN>",
-      "token_type": "bearer"
     }
     ```
 
@@ -107,9 +102,9 @@ The API will be available at `http://127.0.0.1:8000`.
     ```json
     {
       "organization_name": "Tech Corp",
-      "visit_date": "2024-12-01T00:00:00",
-      "visit_start_time": "2024-12-01T10:00:00",
-      "visit_end_time": "2024-12-01T12:00:00"
+      "visit_date": "2024-12-01",
+      "visit_start_time": "10:00:00",
+      "visit_end_time": "12:00:00"
     }
     ```
 
@@ -125,42 +120,11 @@ The API will be available at `http://127.0.0.1:8000`.
 
 ### Environment Variables
 
-- `SECRET_KEY`: Secret key for JWT token signing.
-- `ACCESS_TOKEN_EXPIRE_MINUTES`: Duration for token expiration.
+- `DEBUG`: Set to `True` for development, `False` for production.
 
 ### Security
 
 - Passwords are hashed using **bcrypt**.
-- Tokens are signed with a secret key using **HS256** algorithm.
-
-### Future Enhancements
-
-- Add more roles and permissions.
-- Enhance error handling and validation.
-- Integrate Swagger for API documentation.
-
-### Contributing
-
-1. Fork the repository.
-2. Create a new branch:
-
-   ```bash
-   git checkout -b feature-name
-   ```
-
-3. Commit your changes:
-
-   ```bash
-   git commit -m "Add feature name"
-   ```
-
-4. Push to the branch:
-
-   ```bash
-   git push origin feature-name
-   ```
-
-5. Create a pull request.
 
 ### Contact
 
