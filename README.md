@@ -27,7 +27,7 @@ This project is a RESTful API built with **Django** and **Django REST Framework 
 
    ```bash
    git clone https://github.com/Remy-Tresor250/visitor_management.git
-   cd your-repo-name
+   cd visitor_management
    ```
 
 2. Create and activate a virtual environment:
