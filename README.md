@@ -70,7 +70,7 @@ The API will be available at `http://127.0.0.1:8000`.
 #### User Endpoints
 
 - **Register a User**:
-  - **POST** `/users/register/`
+  - **POST** `/register/`
   - **Request Body**:
 
     ```json
@@ -83,7 +83,7 @@ The API will be available at `http://127.0.0.1:8000`.
     ```
 
 - **Login**:
-  - **POST** `/token/`
+  - **POST** `/`
   - **Request Body**:
 
     ```json
