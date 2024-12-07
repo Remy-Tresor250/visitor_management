@@ -34,4 +34,4 @@ class Visits(models.Model):
     check_out_date = models.DateTimeField(null=False)
     purpose_of_visit = models.CharField(choices=PURPOSE_OF_VISIT, max_length=20, null=False)
     accepted = models.BooleanField(default=False)
-    status = models.CharField(choices=STATUS_CHOICES, max_length=10, default="PENDING")
+    status = models.CharField(choices=STATUS_CHOICES, max_length=10, default="PENDING", null=True)

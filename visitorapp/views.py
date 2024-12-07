@@ -1,10 +1,12 @@
 from datetime import timezone
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.hashers import check_password
 from .models import User, Visits
 from .forms import UserRegistrationForm, LoginForm, VisitRequestForm
 from django.utils import timezone
+from django.views.decorators.http import require_http_methods
 
 def register_view(request):
     if request.method == "POST":
@@ -109,3 +111,20 @@ def view_visits(request):
     else:
         return redirect('dashboard')
 
+@require_http_methods(["GET"])
+def get_all_users(request):
+    try:
+        users = User.objects.all().values()  # Adjust fields as needed
+        users_list = list(users)  # Convert QuerySet to a list for serialization
+        return JsonResponse({"users": users_list}, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+@require_http_methods(["GET"])
+def get_all_visits(request):
+    try:
+        visits = Visits.objects.all().values()  # Adjust fields as needed
+        visits_list = list(visits)  # Convert QuerySet to a list for serialization
+        return JsonResponse({"visits": visits_list}, status=200)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)

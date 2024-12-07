@@ -11,7 +11,7 @@ class UserRegistrationForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save(commit=False)
-        user.password = make_password(self.cleaned_data["password"])  # Hash password
+        user.password = make_password(self.cleaned_data["password"])
         if commit:
             user.save()
         return user
